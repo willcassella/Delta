@@ -7,5 +7,5 @@ typedef struct dt_RenderCommand dt_RenderCommand;
 
 struct dt_RenderCommand {
 	float coords[6];
-	dt_Color_t color;
+	dt_Color color;
 };

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="private">
+      <UniqueIdentifier>{be345161-4628-4b05-8b2c-ec8a3fcd74aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{e19c4bab-a4d0-48c7-a171-a6b9138f062e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Delta\dt_common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Delta\dt_layout.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Delta\dt_template.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Delta\render_command.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\private\dt_build_private.h">
+      <Filter>private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\private\font_loader.h">
+      <Filter>private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\private\serializer.h">
+      <Filter>private</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\pugiconfig.hpp">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\pugixml.hpp">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Delta\dt_model.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Delta\dt_model_v2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\dt_common.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\dt_layout.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\dt_template.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\font_loader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\serializer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\pugixml.cpp">
+      <Filter>third_party</Filter>
+    </ClCompile>
+    <ClCompile Include="source\dt_model.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\model_test.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="test.xml" />
+  </ItemGroup>
+</Project>

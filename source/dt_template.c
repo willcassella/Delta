@@ -7,7 +7,7 @@
 #include "../private/dt_build_private.h"
 
 dt_template_Property dt_template_Property_expr(
-	dt_ViewModel_Expr_t const expr
+	dt_ViewModel_Expr const expr
 ) {
 	dt_template_Property out;
 	out.expr = expr;
@@ -16,7 +16,7 @@ dt_template_Property dt_template_Property_expr(
 }
 
 dt_template_Property dt_template_Property_bool(
-	dt_bool_t const value
+	dt_bool const value
 ) {
 	dt_template_Property out;
 	out.fixed_bool = value;
@@ -24,7 +24,7 @@ dt_template_Property dt_template_Property_bool(
 	return out;
 }
 
-dt_bool_t dt_template_Property_get_bool(
+dt_bool dt_template_Property_get_bool(
 	dt_template_Property const property,
 	dt_ViewModel const* const view_model
 ) {
@@ -64,7 +64,7 @@ int32_t dt_template_Property_get_i32(
 }
 
 dt_template_Property dt_template_Property_color(
-	dt_Color_t const value
+	dt_Color const value
 ) {
 	dt_template_Property out;
 	out.fixed_color = value;
@@ -72,7 +72,7 @@ dt_template_Property dt_template_Property_color(
 	return out;
 }
 
-dt_Color_t dt_template_Property_get_color(
+dt_Color dt_template_Property_get_color(
 	dt_template_Property const property,
 	dt_ViewModel const* const view_model
 ) {

@@ -12,26 +12,24 @@ static void dt_layout_generate_rect(
 	float const y,
 	float const width,
 	float const height,
-	dt_Color_t const color
+	dt_Color const color
 ) {
-	// TODO: Optimize by performing fewer allocations
-	dt_RenderCommand* command = dt_Allocator_allocate(allocator, sizeof(dt_RenderCommand));
-	command->coords[0] = x;
-	command->coords[1] = y;
-	command->coords[2] = x;
-	command->coords[3] = y + height;
-	command->coords[4] = x + width;
-	command->coords[5] = y + height;
-	command->color = color;
+	dt_RenderCommand* const commands = dt_Allocator_allocate(allocator, sizeof(dt_RenderCommand[2]));
+	commands[0].coords[0] = x;
+	commands[0].coords[1] = y;
+	commands[0].coords[2] = x;
+	commands[0].coords[3] = y + height;
+	commands[0].coords[4] = x + width;
+	commands[0].coords[5] = y + height;
+	commands[0].color = color;
 
-	command = dt_Allocator_allocate(allocator, sizeof(dt_RenderCommand));
-	command->coords[0] = x;
-	command->coords[1] = y;
-	command->coords[2] = x + width;
-	command->coords[3] = y + height;
-	command->coords[4] = x + width;
-	command->coords[5] = y;
-	command->color = color;
+	commands[1].coords[0] = x;
+	commands[1].coords[1] = y;
+	commands[1].coords[2] = x + width;
+	commands[1].coords[3] = y + height;
+	commands[1].coords[4] = x + width;
+	commands[1].coords[5] = y;
+	commands[1].color = color;
 }
 
 DT_FORCEINLINE static void dt_layout_align_top_compact(

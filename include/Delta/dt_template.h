@@ -3,7 +3,7 @@
 
 #include "dt_layout.h"
 
-typedef char const* dt_ViewModel_Expr_t;
+typedef char const* dt_ViewModel_Expr;
 typedef struct dt_ViewModel dt_ViewModel;
 typedef struct dt_template_Property dt_template_Property;
 typedef struct dt_template_EdgeBox dt_template_EdgeBox;
@@ -19,26 +19,26 @@ typedef struct dt_template_StackChild dt_template_StackChild;
 typedef struct dt_template_Window dt_template_Window;
 
 /* ViewModel function used to evaluate boolean properties and predicates. */
-typedef dt_bool_t(*dt_ViewModel_Eval_bool_fn)(
+typedef dt_bool(*dt_ViewModel_Eval_bool_fn)(
 	void* user_data,
-	dt_ViewModel_Expr_t expr
+	dt_ViewModel_Expr expr
 );
 
 /* ViewModel function used to evaluate float properties. */
 typedef float(*dt_ViewModel_Eval_f32_fn)(
 	void* user_data,
-	dt_ViewModel_Expr_t expr
+	dt_ViewModel_Expr expr
 );
 
 /* ViewModel function used to evaluate int32 properties. */
 typedef int32_t(*dt_ViewModel_Eval_i32_fn)(
 	void* user_data,
-	dt_ViewModel_Expr_t expr
+	dt_ViewModel_Expr expr
 );
 
-typedef dt_Color_t(*dt_ViewModel_Eval_Color_fn)(
+typedef dt_Color(*dt_ViewModel_Eval_Color_fn)(
 	void* user_data,
-	dt_ViewModel_Expr_t expr
+	dt_ViewModel_Expr expr
 );
 
 struct dt_ViewModel {
@@ -51,24 +51,24 @@ struct dt_ViewModel {
 
 struct dt_template_Property {
 	union {
-		dt_bool_t fixed_bool;
+		dt_bool fixed_bool;
 		float fixed_f32;
 		int32_t fixed_i32;
-		dt_Color_t fixed_color;
-		dt_ViewModel_Expr_t expr;
+		dt_Color fixed_color;
+		dt_ViewModel_Expr expr;
 	};
-	dt_bool_t is_expr;
+	dt_bool is_expr;
 };
 
 DT_FUNC dt_template_Property dt_template_Property_expr(
-	dt_ViewModel_Expr_t expr
+	dt_ViewModel_Expr expr
 );
 
 DT_FUNC dt_template_Property dt_template_Property_bool(
-	dt_bool_t value
+	dt_bool value
 );
 
-DT_FUNC dt_bool_t dt_template_Property_get_bool(
+DT_FUNC dt_bool dt_template_Property_get_bool(
 	dt_template_Property property,
 	dt_ViewModel const* view_model
 );
@@ -92,10 +92,10 @@ DT_FUNC int32_t dt_template_Property_get_i32(
 );
 
 DT_FUNC dt_template_Property dt_template_Property_color(
-	dt_Color_t value
+	dt_Color value
 );
 
-DT_FUNC dt_Color_t dt_template_Property_get_color(
+DT_FUNC dt_Color dt_template_Property_get_color(
 	dt_template_Property property,
 	dt_ViewModel const* view_model
 );
@@ -158,7 +158,7 @@ DT_FUNC dt_layout_Element dt_template_Element_generate_layout(
  */
 
 struct dt_template_BlockBorder {
-	dt_ViewModel_Expr_t element_predicate_expr;
+	dt_ViewModel_Expr element_predicate_expr;
 	dt_template_Element template_element;
 	dt_template_Property min_width;
 	dt_template_Property max_width;
@@ -199,7 +199,7 @@ struct dt_template_Box {
 
 struct dt_template_BoxChild {
 	dt_template_BoxChild const* next_child;
-	dt_ViewModel_Expr_t predicate_expr;
+	dt_ViewModel_Expr predicate_expr;
 	dt_template_Element template_element;
 	dt_template_EdgeBox margin;
 	dt_template_Property horizontal_alignment;
@@ -251,7 +251,7 @@ struct dt_template_Stack {
 
 struct dt_template_StackChild {
 	dt_template_StackChild const* next_child;
-	dt_ViewModel_Expr_t predicate_expr;
+	dt_ViewModel_Expr predicate_expr;
 	dt_template_Element template_element;
 	dt_template_EdgeBox margin;
 	dt_template_Property cross_alignment;

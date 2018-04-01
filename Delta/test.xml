@@ -1,0 +1,14 @@
+<block_border width="256" height="256" bdr_left="16" bdr_right="16" bdr_top="16" bdr_bottom="16" bdr_color="black" bg_color="blue">
+    <stack stack_dir="right_to_left" last_child_fill="true">
+        <block_border min_width="32" mgn_left="16" mgn_right="16" bg_color="red"/>
+        <block_border min_width="32" mgn_left="16" mgn_right="16" bg_color="green"/>
+        <block_border min_width="32" mgn_left="16" mgn_right="16" bg_color="red"/>
+        <block_border min_width="32" mgn_left="16" mgn_right="16" bg_color="green">
+            <stack stack_dir="top_to_bottom">
+                <block_border h_align="left" max_width="24" min_height="16" mgn_left="4" mgn_right="4" mgn_top="8" bdr_left="4" bdr_right="4" bdr_color="black" bg_color="blue"/>
+                <block_border h_align="right" max_width="24" min_height="20" mgn_left="4" mgn_right="4" mgn_top="8" bdr_left="4" bdr_right="4" bdr_color="black" bg_color="blue"/>
+                <block_border h_align="left" max_width="14" min_height="24" mgn_left="4" mgn_right="4" mgn_top="8" bdr_left="4" bdr_right="4" bdr_color="black" bg_color="blue"/>
+            </stack>
+        </block_border>
+    </stack>
+</block_border>

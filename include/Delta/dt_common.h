@@ -18,8 +18,8 @@
 #define DT_LIKELY(x) (x)
 #define DT_UNLIKELY(x) (x)
 
-typedef uint8_t dt_bool_t;
-typedef uint32_t dt_Color_t;
+typedef uint8_t dt_bool;
+typedef uint32_t dt_Color;
 typedef struct dt_Allocator dt_Allocator;
 typedef enum dt_HorizontalAlignment dt_HorizontalAlignment;
 typedef enum dt_VerticalAlignment dt_VerticalAlignment;
@@ -38,38 +38,38 @@ typedef enum dt_VerticalAlignment dt_VerticalAlignment;
 #define DT_COLOR_ALPHA_MASK 0x000000FFu
 
 DT_FUNC uint8_t dt_Color_get_red(
-	dt_Color_t color
+	dt_Color color
 );
 
 DT_FUNC void dt_Color_set_red(
-	dt_Color_t* color,
+	dt_Color* color,
 	uint8_t red
 );
 
 DT_FUNC uint8_t dt_Color_get_green(
-	dt_Color_t color
+	dt_Color color
 );
 
 DT_FUNC void dt_Color_set_green(
-	dt_Color_t* color,
+	dt_Color* color,
 	uint8_t green
 );
 
 DT_FUNC uint8_t dt_Color_get_blue(
-	dt_Color_t color
+	dt_Color color
 );
 
 DT_FUNC void dt_Color_set_blue(
-	dt_Color_t* color,
+	dt_Color* color,
 	uint8_t blue
 );
 
 DT_FUNC uint8_t dt_Color_get_alpha(
-	dt_Color_t color
+	dt_Color color
 );
 
 DT_FUNC void dt_Color_set_alpha(
-	dt_Color_t* color,
+	dt_Color* color,
 	uint8_t alpha
 );
 

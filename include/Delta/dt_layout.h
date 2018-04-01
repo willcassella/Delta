@@ -100,8 +100,8 @@ struct dt_layout_BlockBorder {
 	dt_layout_EdgeBox padding;
 	dt_layout_EdgeBox border_thickness;
 	dt_layout_CornerBox corner_radii;
-	dt_Color_t background_color;
-	dt_Color_t border_color;
+	dt_Color background_color;
+	dt_Color border_color;
 };
 
 DT_FUNC void dt_layout_BlockBorder_arrange_content(
@@ -161,7 +161,7 @@ enum dt_layout_Stack_Direction {
 struct dt_layout_Stack {
 	dt_layout_StackChild* first_child;
 	dt_layout_Stack_Direction stack_direction;
-	dt_bool_t last_child_fill;
+	dt_bool last_child_fill;
 };
 
 struct dt_layout_StackChild {
@@ -192,7 +192,7 @@ DT_FUNC void dt_layout_Stack_generate_commands(
 struct dt_layout_Window {
 	dt_layout_Box* content;
 	dt_layout_Bounds content_bounds;
-	dt_Color_t background_color;
+	dt_Color background_color;
 };
 
 DT_FUNC void dt_layout_Window_arrange_content(
