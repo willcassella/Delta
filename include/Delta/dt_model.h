@@ -1,102 +1,110 @@
 // dt_model.h
+#pragma once
 
-#include <stdint.h>
+#include <stdarg.h>
 #include "dt_common.h"
 
 typedef struct dt_Context dt_Context;
+typedef uint32_t dt_Lifetime;
 
-DT_FUNC dt_Context* dt_Context_new(
+/* Returns the size of the dt_Context object. */
+DT_FUNC size_t
+dt_Context_size(
 );
 
-DT_FUNC void dt_Context_free(
+/* Initializes the given dt_Context object. */
+DT_FUNC void
+dt_Context_new(
     dt_Context* ctx
 );
 
-DT_FUNC void dt_push_prop(
+/* Destroys the given context object. */
+DT_FUNC void
+dt_Context_free(
+    dt_Context* ctx
+);
+
+typedef void(*dt_model_fn)(
+    dt_Context* ctx,
+    va_list args
+);
+
+DT_FUNC void
+dt_defer(
+    dt_Context* ctx,
+    dt_model_fn fn,
+    ...
+);
+
+DT_FUNC void
+dt_vdefer(
+    dt_Context* ctx,
+    dt_model_fn fn,
+    va_list args
+);
+
+DT_FORCEINLINE void
+dt_undefer(
+    dt_Context* ctx,
+    dt_model_fn fn,
+    ...
+) {
+    va_list args;
+    va_start(args, fn);
+    fn(ctx, args);
+    va_end(args);
+}
+
+DT_FUNC void
+dt_pop(
+    dt_Context* ctx
+);
+
+/* Pushes a property onto the property stack. */
+DT_FUNC void
+dt_push_prop(
     dt_Context* ctx,
     char const* name
 );
 
-DT_FUNC void dt_pop(
+DT_FUNC void
+dt_push_elem(
     dt_Context* ctx
 );
 
-typedef void*(*dt_obj_GetFn)(
-    void* userdata,
-    void* obj
-);
-
-DT_FUNC void dt_obj_get(
-    dt_Context* ctx,
-    dt_obj_GetFn get_fn,
-    void* userdata
-);
-
-typedef void*(*dt_obj_iter_BeginFn)(
-    void* userdata,
-    void* obj
-);
-
-typedef void*(*dt_obj_iter_NextFn)(
-    void* userdata,
-    void* iter
-);
-
-typedef dt_bool(*dt_obj_iter_EndFn)(
-    void* userdata,
-    void* iter
-);
-
-DT_FUNC void dt_obj_iter_begin(
-    dt_Context* ctx,
-    dt_obj_iter_BeginFn begin_fn,
-    void* userdata
-);
-
-DT_FUNC void dt_obj_iter_next(
-    dt_Context* ctx,
-    dt_obj_iter_NextFn next_fn,
-    void* userdata
-);
-
-DT_FUNC void dt_obj_iter_end(
-    dt_Context* ctx,
-    dt_obj_iter_EndFn end_fn,
-    void* userdata
-);
-
-DT_FUNC void dt_f32_const(
+DT_FUNC void
+dt_f32(
     dt_Context* ctx,
     float value
 );
 
-typedef float(*dt_f32_GetFn)(
-    void* userdata,
-    void* obj
-);
-
-DT_FUNC void dt_f32_get(
+DT_FUNC dt_bool
+dt_f32_io(
     dt_Context* ctx,
-    dt_f32_GetFn get_fn,
-    void* userdata
+    float* io_value
 );
 
-typedef void(*dt_f32_SetFn)(
-    void* userdata,
-    void* obj,
-    float v
-);
-
-DT_FUNC void dt_f32_set(
+DT_FUNC void
+dt_i32(
     dt_Context* ctx,
-    dt_f32_SetFn set_fn,
-    void* userdata
+    int32_t value
 );
 
-DT_FUNC void dt_push_attr_f32_max(
-    dt_Context* ctx
+DT_FUNC dt_bool
+dt_i32_io(
+    dt_Context* ctx,
+    int32_t* io_value
 );
 
-DT_FUNC void dt_push_attr_f32_min(
-    dt_Context* ctx
+DT_FUNC void
+dt_size(
+    dt_Context* ctx,
+    size_t value
 );
+
+DT_FUNC dt_bool
+dt_size_io(
+    dt_Context* ctx,
+    size_t* io_value
+);
+

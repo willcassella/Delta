@@ -1,16 +1,19 @@
 // serializer.cpp
 
-#include "../Delta/third_party/pugixml.hpp"
+#include <string.h>
+#include <pugixml.hpp>
 #include "../include/Delta/dt_template.h"
 
 namespace dt
 {
-	void load_Element(
+	void
+	load_Element(
 		pugi::xml_node node,
 		dt_template_Element* out_element
 	);
 
-	static bool load_bool(
+	static bool
+	load_bool(
 		pugi::xml_attribute const attribute,
 		char const* const property_name,
 		dt_template_Property* const io_property
@@ -24,7 +27,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_i32(
+	static bool
+	load_i32(
 		pugi::xml_attribute const attribute,
 		char const* const property_name,
 		dt_template_Property* const io_property)
@@ -38,7 +42,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_f32(
+	static bool
+	load_f32(
 		pugi::xml_attribute const attribute,
 		char const* const property_name,
 		dt_template_Property* const io_property)
@@ -52,7 +57,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_color(
+	static bool
+	load_color(
 		pugi::xml_attribute const attribute,
 		char const* const property_name,
 		dt_template_Property* const io_property)
@@ -90,7 +96,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_halign(
+	static bool
+	load_halign(
 		pugi::xml_attribute const attribute,
 		dt_template_Property* const io_property,
 		char const* const property_name = "h_align"
@@ -116,7 +123,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_valign(
+	static bool
+	load_valign(
 		pugi::xml_attribute const attribute,
 		dt_template_Property* const io_property,
 		char const* const property_name = "v_align"
@@ -142,7 +150,8 @@ namespace dt
 		return false;
 	}
 
-	static bool load_bounds(
+	static bool
+	load_bounds(
 		pugi::xml_attribute const attribute,
 		dt_template_Property* DT_RESTRICT const min_width,
 		dt_template_Property* DT_RESTRICT const max_width,
@@ -187,7 +196,8 @@ namespace dt
 		return false;
 	}
 
-	static void load_BlockBorder(
+	static void
+	load_BlockBorder(
 		pugi::xml_node node,
 		dt_template_BlockBorder* io_block_border
 	) {
@@ -208,7 +218,8 @@ namespace dt
 		}
 	}
 
-	static void load_Box(
+	static void
+	load_Box(
 		pugi::xml_node const node,
 		dt_template_Box* const io_box
 	) {
@@ -238,7 +249,8 @@ namespace dt
 		}
 	}
 
-	static void load_Stack(
+	static void
+	load_Stack(
 		pugi::xml_node const node,
 		dt_template_Stack* const io_stack
 	) {
@@ -292,7 +304,8 @@ namespace dt
 		}
 	}
 
-	static void load_Element(
+	void
+	load_Element(
 		pugi::xml_node node,
 		dt_template_Element* out_element
 	) {
@@ -316,7 +329,8 @@ namespace dt
 		}
 	}
 
-	dt_template_Window const* load_ui(
+	dt_template_Window const*
+	load_ui(
 		char const* const path
 	) {
 		auto* const window = new dt_template_Window;

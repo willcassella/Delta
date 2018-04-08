@@ -6,15 +6,16 @@
 #include "../include/Delta/render_command.h"
 #include "../private/dt_build_private.h"
 
-static void dt_layout_generate_rect(
-	dt_Allocator* const allocator,
+static void
+dt_layout_generate_rect(
+	struct dt_Allocator* const allocator,
 	float const x,
 	float const y,
 	float const width,
 	float const height,
 	dt_Color const color
 ) {
-	dt_RenderCommand* const commands = dt_Allocator_allocate(allocator, sizeof(dt_RenderCommand[2]));
+	struct dt_RenderCommand* const commands = dt_Allocator_allocate(allocator, sizeof(struct dt_RenderCommand[2]));
 	commands[0].coords[0] = x;
 	commands[0].coords[1] = y;
 	commands[0].coords[2] = x;
@@ -32,7 +33,8 @@ static void dt_layout_generate_rect(
 	commands[1].color = color;
 }
 
-DT_FORCEINLINE static void dt_layout_align_top_compact(
+DT_FORCEINLINE static void
+dt_layout_align_top_compact(
 	float const min_space,
 	float const computed_space,
 	float const top_margin,
@@ -52,7 +54,8 @@ DT_FORCEINLINE static void dt_layout_align_top_compact(
 	*io_space = computed_space;
 }
 
-DT_FORCEINLINE static void dt_layout_align_bottom_compact(
+DT_FORCEINLINE static void
+dt_layout_align_bottom_compact(
 	float const min_space,
 	float const computed_space,
 	float const top_margin,
@@ -70,7 +73,8 @@ DT_FORCEINLINE static void dt_layout_align_bottom_compact(
 	*io_space = computed_space;
 }
 
-DT_FORCEINLINE static void dt_layout_align_top_stretch(
+DT_FORCEINLINE static void
+dt_layout_align_top_stretch(
 	float const min_space,
 	float const max_space,
 	float const computed_space,
@@ -87,7 +91,8 @@ DT_FORCEINLINE static void dt_layout_align_top_stretch(
 	*io_space = fminf(available_space, max_space);
 }
 
-DT_FORCEINLINE static void dt_layout_align_bottom_stretch(
+DT_FORCEINLINE static void
+dt_layout_align_bottom_stretch(
 	float const min_space,
 	float const max_space,
 	float const computed_space,
@@ -105,7 +110,8 @@ DT_FORCEINLINE static void dt_layout_align_bottom_stretch(
 	*io_space = space;
 }
 
-static void dt_layout_align_x(
+static void
+dt_layout_align_x(
 	float const max_width,
 	float const left_padding,
 	float const right_padding,
@@ -138,7 +144,8 @@ static void dt_layout_align_x(
 	}
 }
 
-static void dt_layout_align_y(
+static void
+dt_layout_align_y(
 	float const max_height,
 	float const top_padding,
 	float const bottom_padding,
@@ -171,8 +178,9 @@ static void dt_layout_align_y(
 	}
 }
 
-void dt_layout_Bounds_validate(
-	dt_layout_Bounds* const io_bounds
+void
+dt_layout_Bounds_validate(
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	float computed_width = io_bounds->computed_width;
 	float computed_height = io_bounds->computed_height;
@@ -186,9 +194,10 @@ void dt_layout_Bounds_validate(
 	io_bounds->computed_height = computed_height;
 }
 
-void dt_layout_Element_arrange_content(
-	dt_layout_Element const layout_element,
-	dt_layout_Bounds* const io_bounds
+void
+dt_layout_Element_arrange_content(
+	struct dt_layout_Element const layout_element,
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	switch (layout_element.type)
 	{
@@ -214,10 +223,11 @@ void dt_layout_Element_arrange_content(
 	}
 }
 
-void dt_layout_Element_generate_commands(
-	dt_layout_Element const layout_element,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox const content_box
+void
+dt_layout_Element_generate_commands(
+	struct dt_layout_Element const layout_element,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox const content_box
 ) {
 	switch (layout_element.type)
 	{
@@ -247,9 +257,10 @@ void dt_layout_Element_generate_commands(
  *
  */
 
-void dt_layout_BlockBorder_arrange_content(
-	dt_layout_BlockBorder const* const block_border,
-	dt_layout_Bounds* const io_bounds)
+void
+dt_layout_BlockBorder_arrange_content(
+	struct dt_layout_BlockBorder const* const block_border,
+	struct dt_layout_Bounds* const io_bounds)
 {
 	float const add_width = block_border->border_thickness.left + block_border->border_thickness.right + block_border->padding.left + block_border->padding.right;
 	float const add_height = block_border->border_thickness.top + block_border->border_thickness.bottom + block_border->padding.top + block_border->padding.bottom;
@@ -257,10 +268,11 @@ void dt_layout_BlockBorder_arrange_content(
 	io_bounds->computed_height = add_height + block_border->element_bounds.computed_height;
 }
 
-void dt_layout_BlockBorder_generate_commands(
-	dt_layout_BlockBorder const* const block_border,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox content_box
+void
+dt_layout_BlockBorder_generate_commands(
+	struct dt_layout_BlockBorder const* const block_border,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox content_box
 ) {
 	// Generate command for content
 	dt_layout_generate_rect(command_allocator, content_box.x, content_box.y, content_box.width, content_box.height, block_border->background_color);
@@ -285,13 +297,14 @@ void dt_layout_BlockBorder_generate_commands(
  *
  */
 
-void dt_layout_Box_arrange_content(
-	dt_layout_Box const* const layout_box,
-	dt_layout_Bounds* const io_bounds
+void
+dt_layout_Box_arrange_content(
+	struct dt_layout_Box const* const layout_box,
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	float content_width = 0.f;
 	float content_height = 0.f;
-	for (dt_layout_BoxChild const* child = layout_box->first_child; child != NULL; child = child->next_child)
+	for (struct dt_layout_BoxChild const* child = layout_box->first_child; child != NULL; child = child->next_child)
 	{
 		// Compute required width and height
 		float const child_width = child->margin.left + child->bounds.computed_width + child->margin.right;
@@ -305,15 +318,16 @@ void dt_layout_Box_arrange_content(
 	io_bounds->computed_height = fmaxf(content_height, io_bounds->min_height);
 }
 
-void dt_layout_Box_generate_commands(
-	dt_layout_Box const* const layout_box,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox const content_box
+void
+dt_layout_Box_generate_commands(
+	struct dt_layout_Box const* const layout_box,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox const content_box
 ) {
 	// Generate child commands
-	for (dt_layout_BoxChild const* child = layout_box->first_child; child != NULL; child = child->next_child)
+	for (struct dt_layout_BoxChild const* child = layout_box->first_child; child != NULL; child = child->next_child)
 	{
-		dt_layout_ContentBox child_content_box = content_box;
+		struct dt_layout_ContentBox child_content_box = content_box;
 		dt_layout_align_x(child->bounds.max_width, child->margin.left, child->margin.right, child->horizontal_alignment, &child_content_box.x, &child_content_box.width);
 		dt_layout_align_y(child->bounds.max_height, child->margin.top, child->margin.bottom, child->vertical_alignment, &child_content_box.y, &child_content_box.height);
 		dt_layout_Element_generate_commands(child->element, command_allocator, child_content_box);
@@ -327,14 +341,15 @@ void dt_layout_Box_generate_commands(
  */
 
 /* Arranges content for a horizontal (LEFT_TO_RIGHT or RIGHT_TO_LEFT) stack. */
-static void dt_layout_Stack_horiz_arrange_content(
-	dt_layout_Stack const* const stack,
-	dt_layout_Bounds* const io_bounds
+static void
+dt_layout_Stack_horiz_arrange_content(
+	struct dt_layout_Stack const* const stack,
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	float content_width = 0.f;
 	float content_height = 0.f;
 	float left_padding = 0.f;
-	for (dt_layout_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
+	for (struct dt_layout_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
 	{
 		content_width = fmaxf(left_padding, child->margin.left) + child->bounds.computed_width;
 		left_padding = child->margin.right;
@@ -348,14 +363,15 @@ static void dt_layout_Stack_horiz_arrange_content(
 }
 
 /* Arranges content for a vertical (TOP_TO_BOTTOM or BOTTOM_TO_TOP) stack. */
-static void dt_layout_Stack_vert_arrange_content(
-	dt_layout_Stack const* const stack,
-	dt_layout_Bounds* const io_bounds
+static void
+dt_layout_Stack_vert_arrange_content(
+	struct dt_layout_Stack const* const stack,
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	float content_width = 0.f;
 	float content_height = 0.f;
 	float top_padding = 0.f;
-	for (dt_layout_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
+	for (struct dt_layout_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
 	{
 		content_height = fmaxf(top_padding, child->margin.top) + child->bounds.computed_height;
 		top_padding = child->margin.bottom;
@@ -368,9 +384,10 @@ static void dt_layout_Stack_vert_arrange_content(
 	io_bounds->computed_width = content_width;
 }
 
-void dt_layout_Stack_arrange_content(
-	dt_layout_Stack const* const layout_stack,
-	dt_layout_Bounds* const io_bounds
+void
+dt_layout_Stack_arrange_content(
+	struct dt_layout_Stack const* const layout_stack,
+	struct dt_layout_Bounds* const io_bounds
 ) {
 	switch (layout_stack->stack_direction)
 	{
@@ -390,10 +407,11 @@ void dt_layout_Stack_arrange_content(
 }
 
 /* Generates display commands for a LEFT_TO_RIGHT stack */
-static void dt_layout_Stack_ltr_generate_commands(
-	dt_layout_Stack const* const stack,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox content_box
+static void
+dt_layout_Stack_ltr_generate_commands(
+	struct dt_layout_Stack const* const stack,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox content_box
 ) {
 	if (!stack->first_child)
 	{
@@ -402,10 +420,10 @@ static void dt_layout_Stack_ltr_generate_commands(
 
 	// Generate commands for children (up until last child)
 	float left_padding = 0.f;
-	dt_layout_StackChild const* child;
+	struct dt_layout_StackChild const* child;
 	for (child = stack->first_child; child->next_child != NULL; child = child->next_child)
 	{
-		dt_layout_ContentBox child_content_box = content_box;
+		struct dt_layout_ContentBox child_content_box = content_box;
 
 		// Align horizontally to the left (compact)
 		dt_layout_align_top_compact(
@@ -432,7 +450,7 @@ static void dt_layout_Stack_ltr_generate_commands(
 	}
 
 	// Generate commands for last child
-	dt_layout_ContentBox child_content_box = content_box;
+	struct dt_layout_ContentBox child_content_box = content_box;
 	left_padding = fmaxf(left_padding, child->margin.left);
 
 	// Align vertically as child desires (stretch)
@@ -472,10 +490,11 @@ static void dt_layout_Stack_ltr_generate_commands(
 }
 
 /* Generates display commands for a RIGHT_TO_LEFT stack */
-static void dt_layout_Stack_rtl_generate_commands(
-	dt_layout_Stack const* const stack,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox content_box
+static void
+dt_layout_Stack_rtl_generate_commands(
+	struct dt_layout_Stack const* const stack,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox content_box
 ) {
 	if (!stack->first_child)
 	{
@@ -484,10 +503,10 @@ static void dt_layout_Stack_rtl_generate_commands(
 
 	// Generate commands for children (up until last child)
 	float right_padding = 0.f;
-	dt_layout_StackChild const* child;
+	struct dt_layout_StackChild const* child;
 	for (child = stack->first_child; child->next_child != NULL; child = child->next_child)
 	{
-		dt_layout_ContentBox child_content_box = content_box;
+		struct dt_layout_ContentBox child_content_box = content_box;
 
 		// Align horizontally to the right (compact)
 		dt_layout_align_bottom_compact(
@@ -513,7 +532,7 @@ static void dt_layout_Stack_rtl_generate_commands(
 	}
 
 	// Generate commands for last child
-	dt_layout_ContentBox child_content_box = content_box;
+	struct dt_layout_ContentBox child_content_box = content_box;
 	right_padding = fmaxf(right_padding, child->margin.right);
 
 	// Align vertically as child desires (stretch)
@@ -552,10 +571,11 @@ static void dt_layout_Stack_rtl_generate_commands(
 }
 
 /* Generates display commands for a TOP_TO_BOTTOM stack */
-static void dt_layout_Stack_ttb_generate_commands(
-	dt_layout_Stack const* const stack,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox content_box
+static void
+dt_layout_Stack_ttb_generate_commands(
+	struct dt_layout_Stack const* const stack,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox content_box
 ) {
 	if (!stack->first_child)
 	{
@@ -564,10 +584,10 @@ static void dt_layout_Stack_ttb_generate_commands(
 
 	// Generate commands for children (up until last child)
 	float top_padding = 0.f;
-	dt_layout_StackChild const* child;
+	struct dt_layout_StackChild const* child;
 	for (child = stack->first_child; child->next_child != NULL; child = child->next_child)
 	{
-		dt_layout_ContentBox child_content_box = content_box;
+		struct dt_layout_ContentBox child_content_box = content_box;
 
 		// Align vertically to the top (compact)
 		dt_layout_align_top_compact(
@@ -594,7 +614,7 @@ static void dt_layout_Stack_ttb_generate_commands(
 	}
 
 	// Generate commands for last child
-	dt_layout_ContentBox child_content_box = content_box;
+	struct dt_layout_ContentBox child_content_box = content_box;
 	top_padding = fmaxf(top_padding, child->margin.top);
 
 	// Align horizontally as child desires (stretch)
@@ -634,10 +654,11 @@ static void dt_layout_Stack_ttb_generate_commands(
 }
 
 /* Generates display commands for a BOTTOM_TO_TOP stack */
-static void dt_layout_Stack_btt_generate_commands(
-	dt_layout_Stack const* const stack,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox content_box
+static void
+dt_layout_Stack_btt_generate_commands(
+	struct dt_layout_Stack const* const stack,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox content_box
 ) {
 	if (!stack->first_child)
 	{
@@ -646,10 +667,10 @@ static void dt_layout_Stack_btt_generate_commands(
 
 	// Generate commands for children (up until last child)
 	float bottom_padding = 0.f;
-	dt_layout_StackChild const* child;
+	struct dt_layout_StackChild const* child;
 	for (child = stack->first_child; child->next_child != NULL; child = child->next_child)
 	{
-		dt_layout_ContentBox child_content_box = content_box;
+		struct dt_layout_ContentBox child_content_box = content_box;
 
 		// Align vertically to the bottom (compact)
 		dt_layout_align_bottom_compact(
@@ -675,7 +696,7 @@ static void dt_layout_Stack_btt_generate_commands(
 	}
 
 	// Generate commands for last child
-	dt_layout_ContentBox child_content_box = content_box;
+	struct dt_layout_ContentBox child_content_box = content_box;
 	bottom_padding = fmaxf(bottom_padding, child->margin.bottom);
 
 	// Align horizontally as child desires (stretch)
@@ -713,10 +734,11 @@ static void dt_layout_Stack_btt_generate_commands(
 	dt_layout_Element_generate_commands(child->element, command_allocator, child_content_box);
 }
 
-void dt_layout_Stack_generate_commands(
-	dt_layout_Stack const* const stack,
-	dt_Allocator* const command_allocator,
-	dt_layout_ContentBox const content_box
+void
+dt_layout_Stack_generate_commands(
+	struct dt_layout_Stack const* const stack,
+	struct dt_Allocator* const command_allocator,
+	struct dt_layout_ContentBox const content_box
 ) {
 	switch (stack->stack_direction)
 	{
@@ -747,24 +769,27 @@ void dt_layout_Stack_generate_commands(
  *
  */
 
-void dt_layout_Window_arrange_content(
-	dt_layout_Window* const window
+void
+dt_layout_Window_arrange_content(
+	struct dt_layout_Window* const window
 ) {
 	dt_layout_Box_arrange_content(window->content, &window->content_bounds);
 }
 
-DT_FUNC void dt_layout_Window_generate_commands(
-	dt_layout_Window const* const window,
-	dt_Allocator* const command_allocator,
+DT_FUNC void
+dt_layout_Window_generate_commands(
+	struct dt_layout_Window const* const window,
+	struct dt_Allocator* const command_allocator,
 	float const width,
 	float const height
 ) {
 	dt_layout_generate_rect(command_allocator, 0.f, 0.f, width, height, window->background_color);
 
-	dt_layout_ContentBox content_box;
+	struct dt_layout_ContentBox content_box;
 	content_box.x = 0.f;
 	content_box.y = 0.f;
 	content_box.width = width;
 	content_box.height = height;
 	dt_layout_Box_generate_commands(window->content, command_allocator, content_box);
 }
+

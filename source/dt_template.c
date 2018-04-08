@@ -6,90 +6,101 @@
 #include "../include/Delta/dt_template.h"
 #include "../private/dt_build_private.h"
 
-dt_template_Property dt_template_Property_expr(
+struct dt_template_Property
+dt_template_Property_expr(
 	dt_ViewModel_Expr const expr
 ) {
-	dt_template_Property out;
+	struct dt_template_Property out;
 	out.expr = expr;
 	out.is_expr = DT_TRUE;
 	return out;
 }
 
-dt_template_Property dt_template_Property_bool(
+struct dt_template_Property
+dt_template_Property_bool(
 	dt_bool const value
 ) {
-	dt_template_Property out;
+	struct dt_template_Property out;
 	out.fixed_bool = value;
 	out.is_expr = DT_FALSE;
 	return out;
 }
 
-dt_bool dt_template_Property_get_bool(
-	dt_template_Property const property,
-	dt_ViewModel const* const view_model
+dt_bool
+dt_template_Property_get_bool(
+	struct dt_template_Property const property,
+	struct dt_ViewModel const* const view_model
 ) {
 	return property.is_expr ? view_model->eval_bool(view_model->user_data, property.expr) : property.fixed_bool;
 }
 
-dt_template_Property dt_template_Property_f32(
+struct dt_template_Property
+dt_template_Property_f32(
 	float const value
 ) {
-	dt_template_Property out;
+	struct dt_template_Property out;
 	out.fixed_f32 = value;
 	out.is_expr = DT_FALSE;
 	return out;
 }
 
-float dt_template_Property_get_f32(
-	dt_template_Property const property,
-	dt_ViewModel const* const view_model
+float
+dt_template_Property_get_f32(
+	struct dt_template_Property const property,
+	struct dt_ViewModel const* const view_model
 ) {
 	return property.is_expr ? view_model->eval_f32(view_model->user_data, property.expr) : property.fixed_f32;
 }
 
-dt_template_Property dt_template_Property_i32(
+struct dt_template_Property
+dt_template_Property_i32(
 	int32_t const value
 ) {
-	dt_template_Property out;
+	struct dt_template_Property out;
 	out.fixed_i32 = value;
 	out.is_expr = DT_FALSE;
 	return out;
 }
 
-int32_t dt_template_Property_get_i32(
-	dt_template_Property const property,
-	dt_ViewModel const* const view_model
+int32_t
+dt_template_Property_get_i32(
+	struct dt_template_Property const property,
+	struct dt_ViewModel const* const view_model
 ) {
 	return property.is_expr ? view_model->eval_i32(view_model->user_data, property.expr) : property.fixed_i32;
 }
 
-dt_template_Property dt_template_Property_color(
+struct dt_template_Property
+dt_template_Property_color(
 	dt_Color const value
 ) {
-	dt_template_Property out;
+	struct dt_template_Property out;
 	out.fixed_color = value;
 	out.is_expr = DT_FALSE;
 	return out;
 }
 
-dt_Color dt_template_Property_get_color(
-	dt_template_Property const property,
-	dt_ViewModel const* const view_model
+dt_Color
+dt_template_Property_get_color(
+	struct dt_template_Property const property,
+	struct dt_ViewModel const* const view_model
 ) {
 	return property.is_expr ? view_model->eval_color(view_model->user_data, property.expr) : property.fixed_color;
 }
 
-void dt_template_EdgeBox_init_default(
-	dt_template_EdgeBox* const edge_box
+void
+dt_template_EdgeBox_init_default(
+	struct dt_template_EdgeBox* const edge_box
 ) {
-	memset(edge_box, 0, sizeof(dt_template_EdgeBox));
+	memset(edge_box, 0, sizeof(struct dt_template_EdgeBox));
 }
 
-dt_layout_EdgeBox dt_template_EdgeBox_get_layout(
-	dt_template_EdgeBox const* const edge_box,
-	dt_ViewModel const* const view_model
+struct dt_layout_EdgeBox
+dt_template_EdgeBox_get_layout(
+	struct dt_template_EdgeBox const* const edge_box,
+	struct dt_ViewModel const* const view_model
 ) {
-	dt_layout_EdgeBox out;
+	struct dt_layout_EdgeBox out;
 	out.top = dt_template_Property_get_f32(edge_box->top, view_model);
 	out.right = dt_template_Property_get_f32(edge_box->right, view_model);
 	out.bottom = dt_template_Property_get_f32(edge_box->bottom, view_model);
@@ -97,17 +108,19 @@ dt_layout_EdgeBox dt_template_EdgeBox_get_layout(
 	return out;
 }
 
-void dt_template_CornerBox_init(
-	dt_template_CornerBox* const corner_box
+void
+dt_template_CornerBox_init(
+	struct dt_template_CornerBox* const corner_box
 ) {
-	memset(corner_box, 0, sizeof(dt_template_CornerBox));
+	memset(corner_box, 0, sizeof(struct dt_template_CornerBox));
 }
 
-dt_layout_CornerBox dt_template_CornerBox_get_layout(
-	dt_template_CornerBox const* const corner_box,
-	dt_ViewModel const* const view_model
+struct dt_layout_CornerBox
+dt_template_CornerBox_get_layout(
+	struct dt_template_CornerBox const* const corner_box,
+	struct dt_ViewModel const* const view_model
 ) {
-	dt_layout_CornerBox out;
+	struct dt_layout_CornerBox out;
 	out.top_left = dt_template_Property_get_f32(corner_box->top_left, view_model);
 	out.top_right = dt_template_Property_get_f32(corner_box->top_right, view_model);
 	out.bottom_left = dt_template_Property_get_f32(corner_box->bottom_left, view_model);
@@ -115,13 +128,14 @@ dt_layout_CornerBox dt_template_CornerBox_get_layout(
 	return out;
 }
 
-dt_layout_Element dt_template_Element_generate_layout(
-	dt_template_Element const template_element,
-	dt_ViewModel const* view_model,
-	dt_Allocator* const layout_allocator,
-	dt_layout_Bounds* const out_bounds
+struct dt_layout_Element
+dt_template_Element_generate_layout(
+	struct dt_template_Element const template_element,
+	struct dt_ViewModel const* view_model,
+	struct dt_Allocator* const layout_allocator,
+	struct dt_layout_Bounds* const out_bounds
 ) {
-	dt_layout_Element element;
+	struct dt_layout_Element element;
 	element.data = NULL;
 	element.type = DT_LAYOUT_EMPTY;
 
@@ -159,11 +173,12 @@ dt_layout_Element dt_template_Element_generate_layout(
  *
  */
 
-void dt_template_BlockBorder_init(
-	dt_template_BlockBorder* const out_block_border,
-	dt_template_Element* const out_template_element
+void
+dt_template_BlockBorder_init(
+	struct dt_template_BlockBorder* const out_block_border,
+	struct dt_template_Element* const out_template_element
 ) {
-	memset(out_block_border, 0, sizeof(dt_template_BlockBorder));
+	memset(out_block_border, 0, sizeof(struct dt_template_BlockBorder));
 	out_block_border->max_width = dt_template_Property_f32(INFINITY);
 	out_block_border->max_height = dt_template_Property_f32(INFINITY);
 
@@ -171,13 +186,14 @@ void dt_template_BlockBorder_init(
 	out_template_element->type = DT_TEMPLATE_BLOCK_BORDER;
 }
 
-dt_layout_BlockBorder* dt_template_BlockBorder_generate_layout(
-	dt_template_BlockBorder const* const block_border,
-	dt_ViewModel const* const view_model,
-	dt_Allocator* const layout_allocator,
-	dt_layout_Bounds* const out_bounds
+struct dt_layout_BlockBorder*
+dt_template_BlockBorder_generate_layout(
+	struct dt_template_BlockBorder const* const block_border,
+	struct dt_ViewModel const* const view_model,
+	struct dt_Allocator* const layout_allocator,
+	struct dt_layout_Bounds* const out_bounds
 ) {
-	dt_layout_BlockBorder* const out = dt_Allocator_allocate(layout_allocator, sizeof(dt_layout_BlockBorder));
+	struct dt_layout_BlockBorder* const out = dt_Allocator_allocate(layout_allocator, sizeof(struct dt_layout_BlockBorder));
 
 	// Get actual values for template properties
 	out->padding = dt_template_EdgeBox_get_layout(&block_border->padding, view_model);
@@ -213,11 +229,12 @@ dt_layout_BlockBorder* dt_template_BlockBorder_generate_layout(
  *
  */
 
-void dt_template_Box_init(
-	dt_template_Box* const out_box,
-	dt_template_Element* const out_template_element
+void
+dt_template_Box_init(
+	struct dt_template_Box* const out_box,
+	struct dt_template_Element* const out_template_element
 ) {
-	memset(out_box, 0, sizeof(dt_template_Box));
+	memset(out_box, 0, sizeof(struct dt_template_Box));
 	out_box->max_width = dt_template_Property_f32(INFINITY);
 	out_box->max_height = dt_template_Property_f32(INFINITY);
 
@@ -225,41 +242,45 @@ void dt_template_Box_init(
 	out_template_element->type = DT_TEMPLATE_BOX;
 }
 
-void dt_template_BoxChild_init(
-	dt_template_BoxChild* const out_box_child,
-	dt_template_BoxChild const** const child_ptr
+void
+dt_template_BoxChild_init(
+	struct dt_template_BoxChild* const out_box_child,
+	struct dt_template_BoxChild const** const child_ptr
 ) {
-	memset(out_box_child, 0, sizeof(dt_template_BoxChild));
+	memset(out_box_child, 0, sizeof(struct dt_template_BoxChild));
 	*child_ptr = out_box_child;
 }
 
-void dt_template_Box_set_width(
-	dt_template_Box* const box,
+void
+dt_template_Box_set_width(
+	struct dt_template_Box* const box,
 	float const width
 ) {
 	box->min_width = dt_template_Property_f32(width);
 	box->max_width = dt_template_Property_f32(width);
 }
 
-void dt_template_Box_set_height(
-	dt_template_Box* const box,
+void
+dt_template_Box_set_height(
+	struct dt_template_Box* const box,
 	float const height
 ) {
 	box->min_height = dt_template_Property_f32(height);
 	box->max_height = dt_template_Property_f32(height);
 }
 
-dt_layout_Box* dt_template_Box_generate_layout(
-	dt_template_Box const* const box,
-	dt_ViewModel const* const view_model,
-	dt_Allocator* const layout_allocator,
-	dt_layout_Bounds* const out_bounds
+struct dt_layout_Box*
+dt_template_Box_generate_layout(
+	struct dt_template_Box const* const box,
+	struct dt_ViewModel const* const view_model,
+	struct dt_Allocator* const layout_allocator,
+	struct dt_layout_Bounds* const out_bounds
 ) {
-	dt_layout_Box* const out = dt_Allocator_allocate(layout_allocator, sizeof(dt_layout_Box));
+	struct dt_layout_Box* const out = dt_Allocator_allocate(layout_allocator, sizeof(struct dt_layout_Box));
 
 	// Generate children
-	dt_layout_BoxChild** next_child_ptr = &out->first_child;
-	for (dt_template_BoxChild const* child = box->first_child; child != NULL; child = child->next_child)
+	struct dt_layout_BoxChild** next_child_ptr = &out->first_child;
+	for (struct dt_template_BoxChild const* child = box->first_child; child != NULL; child = child->next_child)
 	{
 		// If the child has a predicate and it fails, skip the child
 		if (child->predicate_expr && !view_model->eval_bool(view_model->user_data, child->predicate_expr))
@@ -268,7 +289,7 @@ dt_layout_Box* dt_template_Box_generate_layout(
 		}
 
 		// Generate layout child
-		dt_layout_BoxChild* const layout_child = dt_Allocator_allocate(layout_allocator, sizeof(dt_layout_BoxChild));
+		struct dt_layout_BoxChild* const layout_child = dt_Allocator_allocate(layout_allocator, sizeof(struct dt_layout_BoxChild));
 		layout_child->margin = dt_template_EdgeBox_get_layout(&child->margin, view_model);
 		layout_child->horizontal_alignment = dt_template_Property_get_i32(child->horizontal_alignment, view_model);
 		layout_child->vertical_alignment = dt_template_Property_get_i32(child->vertical_alignment, view_model);
@@ -296,11 +317,12 @@ dt_layout_Box* dt_template_Box_generate_layout(
  *
  */
 
-void dt_template_Stack_init(
-	dt_template_Stack* const out_stack,
-	dt_template_Element* const out_element
+void
+dt_template_Stack_init(
+	struct dt_template_Stack* const out_stack,
+	struct dt_template_Element* const out_element
 ) {
-	memset(out_stack, 0, sizeof(dt_template_Stack));
+	memset(out_stack, 0, sizeof(struct dt_template_Stack));
 	out_stack->max_width = dt_template_Property_f32(INFINITY);
 	out_stack->max_height = dt_template_Property_f32(INFINITY);
 
@@ -308,26 +330,28 @@ void dt_template_Stack_init(
 	out_element->type = DT_TEMPLATE_STACK;
 }
 
-void dt_template_StackChild_init(
-	dt_template_StackChild* const out_stack_child,
-	dt_template_StackChild const** const out_child_ptr
+void
+dt_template_StackChild_init(
+	struct dt_template_StackChild* const out_stack_child,
+	struct dt_template_StackChild const** const out_child_ptr
 ) {
-	memset(out_stack_child, 0, sizeof(dt_template_StackChild));
+	memset(out_stack_child, 0, sizeof(struct dt_template_StackChild));
 	*out_child_ptr = out_stack_child;
 }
 
-dt_layout_Stack* dt_template_Stack_generate_layout(
-	dt_template_Stack const* stack,
-	dt_ViewModel const* view_model,
-	dt_Allocator* layout_allocator,
-	dt_layout_Bounds* out_bounds
+struct dt_layout_Stack*
+dt_template_Stack_generate_layout(
+	struct dt_template_Stack const* stack,
+	struct dt_ViewModel const* view_model,
+	struct dt_Allocator* layout_allocator,
+	struct dt_layout_Bounds* out_bounds
 ) {
-	dt_layout_Stack* const out = dt_Allocator_allocate(layout_allocator, sizeof(dt_template_Stack));
+	struct dt_layout_Stack* const out = dt_Allocator_allocate(layout_allocator, sizeof(struct dt_template_Stack));
 	out->stack_direction = dt_template_Property_get_i32(stack->stack_direction, view_model);
 	out->last_child_fill = dt_template_Property_get_bool(stack->last_child_fill, view_model);
 
-	dt_layout_StackChild** next_child_ptr = &out->first_child;
-	for (dt_template_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
+	struct dt_layout_StackChild** next_child_ptr = &out->first_child;
+	for (struct dt_template_StackChild const* child = stack->first_child; child != NULL; child = child->next_child)
 	{
 		// Evaluate child's predicate expression if it exists
 		if (child->predicate_expr && !view_model->eval_bool(view_model->user_data, child->predicate_expr))
@@ -336,7 +360,7 @@ dt_layout_Stack* dt_template_Stack_generate_layout(
 		}
 
 		// Generate layout child
-		dt_layout_StackChild* const layout_child = dt_Allocator_allocate(layout_allocator, sizeof(dt_layout_StackChild));
+		struct dt_layout_StackChild* const layout_child = dt_Allocator_allocate(layout_allocator, sizeof(struct dt_layout_StackChild));
 		layout_child->margin = dt_template_EdgeBox_get_layout(&child->margin, view_model);
 		layout_child->cross_alignment = dt_template_Property_get_i32(child->cross_alignment, view_model);
 		layout_child->element = dt_template_Element_generate_layout(child->template_element, view_model, layout_allocator, &layout_child->bounds);
@@ -363,26 +387,29 @@ dt_layout_Stack* dt_template_Stack_generate_layout(
  *
  */
 
-void dt_template_Window_init(
-	dt_template_Window* template_window
+void
+dt_template_Window_init(
+	struct dt_template_Window* template_window
 ) {
-	dt_template_Element content_element;
+	struct dt_template_Element content_element;
 	dt_template_Box_init(&template_window->content_box, &content_element);
 	template_window->background_color = dt_template_Property_color(DT_COLOR_WHITE);
 }
 
-void dt_template_WindowChild_init(
-	dt_template_WindowChild* const out_window_child,
-	dt_template_WindowChild const** const out_child_ptr
+void
+dt_template_WindowChild_init(
+	struct dt_template_BoxChild* const out_window_child,
+	struct dt_template_BoxChild const** const out_child_ptr
 ) {
 	dt_template_BoxChild_init(out_window_child, out_child_ptr);
 }
 
-void dt_template_Window_generate_layout(
-	dt_template_Window const* const window,
-	dt_ViewModel const* const view_model,
-	dt_Allocator* const layout_allocator,
-	dt_layout_Window* const out_layout_window
+void
+dt_template_Window_generate_layout(
+	struct dt_template_Window const* const window,
+	struct dt_ViewModel const* const view_model,
+	struct dt_Allocator* const layout_allocator,
+	struct dt_layout_Window* const out_layout_window
 ) {
 	out_layout_window->content = dt_template_Box_generate_layout(&window->content_box, view_model, layout_allocator, &out_layout_window->content_bounds);
 	out_layout_window->background_color = dt_template_Property_get_color(window->background_color, view_model);
