@@ -2,7 +2,7 @@
 
 #include <math.h>
 #include <assert.h>
-#include "../include/Delta/dt_layout.h"
+#include "../include/Delta/layout.h"
 #include "../include/Delta/render_command.h"
 #include "../private/dt_build_private.h"
 

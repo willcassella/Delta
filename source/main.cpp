@@ -1,15 +1,15 @@
-// main.c
+// main.cpp
 
 #include <stdio.h>
 #include <chrono>
 #define SFML_STATIC
 #include <SFML/Graphics.hpp>
-#include "../include/Delta/dt_template.h"
+#include "../include/Delta/template.h"
 #include "../include/Delta/render_command.h"
 #include "../private/serializer.h"
 
-static constexpr float WINDOW_WIDTH = 1920.f;
-static constexpr float WINDOW_HEIGHT = 1080.f;
+static constexpr float WINDOW_WIDTH = 800.f;
+static constexpr float WINDOW_HEIGHT = 600.f;
 
 int main(
 	int argc,

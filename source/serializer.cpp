@@ -2,7 +2,7 @@
 
 #include <string.h>
 #include <pugixml.hpp>
-#include "../include/Delta/dt_template.h"
+#include "../include/Delta/template.h"
 
 namespace dt
 {

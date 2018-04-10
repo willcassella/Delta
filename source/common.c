@@ -1,7 +1,7 @@
 // dt_common.c
 
 #include <assert.h>
-#include "../include/Delta/dt_common.h"
+#include "../include/Delta/common.h"
 #include "../private/dt_build_private.h"
 
 uint8_t

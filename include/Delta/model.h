@@ -1,11 +1,10 @@
-// dt_model.h
+// model.h
 #pragma once
 
 #include <stdarg.h>
-#include "dt_common.h"
+#include "common.h"
 
 typedef struct dt_Context dt_Context;
-typedef uint32_t dt_Lifetime;
 
 /* Returns the size of the dt_Context object. */
 DT_FUNC size_t
@@ -73,15 +72,15 @@ dt_push_elem(
 );
 
 DT_FUNC void
-dt_f32(
+dt_bool(
     dt_Context* ctx,
-    float value
+    bool value
 );
 
-DT_FUNC dt_bool
-dt_f32_io(
+DT_FUNC bool
+dt_bool_io(
     dt_Context* ctx,
-    float* io_value
+    bool* io_value
 );
 
 DT_FUNC void
@@ -90,10 +89,22 @@ dt_i32(
     int32_t value
 );
 
-DT_FUNC dt_bool
+DT_FUNC bool
 dt_i32_io(
     dt_Context* ctx,
     int32_t* io_value
+);
+
+DT_FUNC void
+dt_f32(
+    dt_Context* ctx,
+    float value
+);
+
+DT_FUNC bool
+dt_f32_io(
+    dt_Context* ctx,
+    float* io_value
 );
 
 DT_FUNC void
@@ -102,9 +113,15 @@ dt_size(
     size_t value
 );
 
-DT_FUNC dt_bool
+DT_FUNC bool
 dt_size_io(
     dt_Context* ctx,
     size_t* io_value
 );
 
+DT_FUNC void
+dt_str(
+    dt_Context* ctx,
+    char const* value,
+    size_t len
+);

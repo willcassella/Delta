@@ -1,7 +1,7 @@
-// dt_template.h
+// template.h
 #pragma once
 
-#include "dt_layout.h"
+#include "layout.h"
 
 typedef char const* dt_ViewModel_Expr;
 
@@ -296,16 +296,19 @@ struct dt_template_Window {
 	struct dt_template_Property background_color;
 };
 
-DT_FUNC void dt_template_Window_init(
+DT_FUNC void
+dt_template_Window_init(
 	struct dt_template_Window* out_window
 );
 
-DT_FUNC void dt_template_WindowChild_init(
+DT_FUNC void
+dt_template_WindowChild_init(
 	struct dt_template_BoxChild* out_window_child,
 	struct dt_template_BoxChild const** out_child_ptr
 );
 
-DT_FUNC void dt_template_Window_generate_layout(
+DT_FUNC void
+dt_template_Window_generate_layout(
 	struct dt_template_Window const* window,
 	struct dt_ViewModel const* view_model,
 	struct dt_Allocator* layout_allocator,

@@ -1,8 +1,9 @@
-// dt_common.h
+// common.h
 #pragma once
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 #	define DT_FUNC extern "C"
@@ -18,10 +19,6 @@
 
 #define DT_LIKELY(x) (x)
 #define DT_UNLIKELY(x) (x)
-
-typedef uint8_t dt_bool;
-#define DT_TRUE 1
-#define DT_FALSE 0
 
 typedef enum {
 	DT_HALIGN_CENTER = 0,

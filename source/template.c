@@ -3,7 +3,7 @@
 #include <math.h>
 #include <assert.h>
 #include <string.h>
-#include "../include/Delta/dt_template.h"
+#include "../include/Delta/template.h"
 #include "../private/dt_build_private.h"
 
 struct dt_template_Property

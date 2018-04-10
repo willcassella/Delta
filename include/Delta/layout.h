@@ -1,7 +1,7 @@
-// dt_layout.h
+// layout.h
 #pragma once
 
-#include "dt_common.h"
+#include "common.h"
 
 struct dt_layout_Bounds {
 	float min_width;
@@ -152,7 +152,7 @@ typedef enum {
 struct dt_layout_Stack {
 	struct dt_layout_StackChild* first_child;
 	dt_layout_Stack_Direction stack_direction;
-	dt_bool last_child_fill;
+	bool last_child_fill;
 };
 
 struct dt_layout_StackChild {

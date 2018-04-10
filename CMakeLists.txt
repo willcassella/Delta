@@ -1,14 +1,15 @@
 # Delta - CMakeLists.txt
 cmake_minimum_required(VERSION 3.6)
+set(CMAKE_CXX_STANDARD_REQUIRED 11)
 find_package(PkgConfig)
 
-set(CMAKE_CXX_STANDARD_REQUIRED 11)
 project(delta)
 
 set(CORE_SOURCE
-    source/dt_common.c
-    source/dt_layout.c
-    source/dt_template.c
+        source/common.c
+        source/layout.c
+        source/template.c
+        source/model.c
 )
 
 set(EXTRA_SOURCE
