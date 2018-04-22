@@ -140,7 +140,7 @@ dt_layout_align_x(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unknown dt_HorizontalAlignment_t value */);
+		assert(false /* Unknown dt_HorizontalAlignment_t value */);
 	}
 }
 
@@ -174,7 +174,7 @@ dt_layout_align_y(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unknown dt_VerticalAlignment_t value */);
+		assert(false /* Unknown dt_VerticalAlignment_t value */);
 	}
 }
 
@@ -219,7 +219,7 @@ dt_layout_Element_arrange_content(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unkown dt_layout_Element_t element type */);
+		assert(false /* Unkown dt_layout_Element_t element type */);
 	}
 }
 
@@ -247,7 +247,7 @@ dt_layout_Element_generate_commands(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unknown dt_layout_Element_t element type */);
+		assert(false /* Unknown dt_layout_Element_t element type */);
 	}
 }
 
@@ -402,7 +402,7 @@ dt_layout_Stack_arrange_content(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unkown dt_layout_Stack orientation */);
+		assert(false /* Unkown dt_layout_Stack orientation */);
 	}
 }
 
@@ -759,7 +759,7 @@ dt_layout_Stack_generate_commands(
 		break;
 
 	default:
-		assert(DT_FALSE /* Unknown dt_layout_Stack orientation */);
+		assert(false /* Unknown dt_layout_Stack orientation */);
 	}
 }
 

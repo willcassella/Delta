@@ -6,7 +6,7 @@
 typedef char const* dt_ViewModel_Expr;
 
 /* ViewModel function used to evaluate boolean properties and predicates. */
-typedef dt_bool(*dt_ViewModel_Eval_bool_fn)(
+typedef bool(*dt_ViewModel_Eval_bool_fn)(
 	void* user_data,
 	dt_ViewModel_Expr expr
 );
@@ -38,13 +38,13 @@ struct dt_ViewModel {
 
 struct dt_template_Property {
 	union {
-		dt_bool fixed_bool;
+		bool fixed_bool;
 		float fixed_f32;
 		int32_t fixed_i32;
 		dt_Color fixed_color;
 		dt_ViewModel_Expr expr;
 	};
-	dt_bool is_expr;
+	bool is_expr;
 };
 
 DT_FUNC struct dt_template_Property
@@ -54,10 +54,10 @@ dt_template_Property_expr(
 
 DT_FUNC struct dt_template_Property
 dt_template_Property_bool(
-	dt_bool value
+	bool value
 );
 
-DT_FUNC dt_bool
+DT_FUNC bool
 dt_template_Property_get_bool(
 	struct dt_template_Property property,
 	struct dt_ViewModel const* view_model

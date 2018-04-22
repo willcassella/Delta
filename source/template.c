@@ -12,21 +12,21 @@ dt_template_Property_expr(
 ) {
 	struct dt_template_Property out;
 	out.expr = expr;
-	out.is_expr = DT_TRUE;
+	out.is_expr = true;
 	return out;
 }
 
 struct dt_template_Property
 dt_template_Property_bool(
-	dt_bool const value
+	bool const value
 ) {
 	struct dt_template_Property out;
 	out.fixed_bool = value;
-	out.is_expr = DT_FALSE;
+	out.is_expr = false;
 	return out;
 }
 
-dt_bool
+bool
 dt_template_Property_get_bool(
 	struct dt_template_Property const property,
 	struct dt_ViewModel const* const view_model
@@ -40,7 +40,7 @@ dt_template_Property_f32(
 ) {
 	struct dt_template_Property out;
 	out.fixed_f32 = value;
-	out.is_expr = DT_FALSE;
+	out.is_expr = false;
 	return out;
 }
 
@@ -58,7 +58,7 @@ dt_template_Property_i32(
 ) {
 	struct dt_template_Property out;
 	out.fixed_i32 = value;
-	out.is_expr = DT_FALSE;
+	out.is_expr = false;
 	return out;
 }
 
@@ -76,7 +76,7 @@ dt_template_Property_color(
 ) {
 	struct dt_template_Property out;
 	out.fixed_color = value;
-	out.is_expr = DT_FALSE;
+	out.is_expr = false;
 	return out;
 }
 
@@ -160,7 +160,7 @@ dt_template_Element_generate_layout(
 		break;
 
 	default:
-		assert(DT_FALSE);
+		assert(false);
 		break;
 	}
 
@@ -414,4 +414,3 @@ dt_template_Window_generate_layout(
 	out_layout_window->content = dt_template_Box_generate_layout(&window->content_box, view_model, layout_allocator, &out_layout_window->content_bounds);
 	out_layout_window->background_color = dt_template_Property_get_color(window->background_color, view_model);
 }
-

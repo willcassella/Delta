@@ -1,11 +1,9 @@
 // serializer.h
 #pragma once
 
-struct dt_template_Window;
+#include "../include/Delta/common.h"
 
-namespace dt
-{
-	dt_template_Window const* load_ui(
-		char const* const path
-	);
-}
+DT_FUNC struct dt_template_Window const*
+dt_load_ui(
+    char const* const path
+);

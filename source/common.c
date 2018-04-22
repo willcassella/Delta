@@ -23,7 +23,7 @@ uint8_t
 dt_Color_get_green(
 	dt_Color const color
 ) {
-	return (uint8_t)(color & DT_COLOR_GREEN_MASK >> 16);
+	return (uint8_t)(color >> 16);
 }
 
 void
@@ -38,7 +38,7 @@ uint8_t
 dt_Color_get_blue(
 	dt_Color const color
 ) {
-	return (uint8_t)(color & DT_COLOR_BLUE_MASK >> 8);
+	return (uint8_t)(color >> 8);
 }
 
 void
@@ -53,7 +53,7 @@ uint8_t
 dt_Color_get_alpha(
 	dt_Color const color
 ) {
-	return (uint8_t)(color & DT_COLOR_ALPHA_MASK);
+	return (uint8_t)color;
 }
 
 void

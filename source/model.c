@@ -2,7 +2,7 @@
 #include "../include/Delta/model.h"
 
 struct dt_Context {
-
+    int nothing;
 };
 
 size_t
