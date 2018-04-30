@@ -13,20 +13,20 @@ dt_Context_size(
 
 void
 dt_Context_new(
-    dt_Context *ctx
+    struct dt_Context *ctx
 ) {
     memset(ctx, 0, sizeof(*ctx));
 }
 
 void
 dt_Context_free(
-    dt_Context *ctx
+    struct dt_Context *ctx
 ) {
 }
 
 void
 dt_defer(
-    dt_Context *ctx,
+    struct dt_Context *ctx,
     dt_model_fn fn,
     ...
 ) {
@@ -38,7 +38,7 @@ dt_defer(
 
 void
 dt_vdefer(
-    dt_Context *ctx,
+    struct dt_Context *ctx,
     dt_model_fn fn,
     va_list args
 ) {

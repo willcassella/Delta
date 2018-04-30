@@ -154,6 +154,48 @@ dt_template_Element_generate_layout(
 
 /*
  *
+ * BOUND
+ *
+ */
+
+struct dt_template_Bound {
+    struct dt_template_Element child;
+    struct dt_template_Property min_width;
+    struct dt_template_Property max_width;
+    struct dt_template_Property min_height;
+    struct dt_template_Property max_height;
+};
+
+DT_FUNC void
+dt_template_Bound_init(
+    struct dt_template_Bound* out_bound,
+    struct dt_template_Element* out_element
+);
+
+DT_FUNC struct dt_layout_Bound*
+dt_template_Bound_generate_layout(
+    struct dt_template_Bound const* bound,
+    struct dt_ViewModel const* view_model,
+    struct dt_Allocator* layout_allocator,
+    struct dt_layout_Bounds* out_bounds
+);
+
+/*
+ *
+ * PADDING
+ *
+ */
+
+struct dt_template_Padding {
+    struct dt_template_Element child;
+    struct dt_template_Property top;
+    struct dt_template_Property right;
+    struct dt_template_Property bottom;
+    struct dt_template_Property left;
+};
+
+/*
+ *
  * BLOCK BORDER
  *
  */
@@ -161,11 +203,6 @@ dt_template_Element_generate_layout(
 struct dt_template_BlockBorder {
 	dt_ViewModel_Expr element_predicate_expr;
 	struct dt_template_Element template_element;
-	struct dt_template_Property min_width;
-	struct dt_template_Property max_width;
-	struct dt_template_Property min_height;
-	struct dt_template_Property max_height;
-	struct dt_template_EdgeBox padding;
 	struct dt_template_EdgeBox border_thickness;
 	struct dt_template_CornerBox corner_radii;
 	struct dt_template_Property background_color;
@@ -194,17 +231,12 @@ dt_template_BlockBorder_generate_layout(
 
 struct dt_template_Box {
 	struct dt_template_BoxChild const* first_child;
-	struct dt_template_Property min_width;
-	struct dt_template_Property max_width;
-	struct dt_template_Property min_height;
-	struct dt_template_Property max_height;
 };
 
 struct dt_template_BoxChild {
 	struct dt_template_BoxChild const* next_child;
 	dt_ViewModel_Expr predicate_expr;
 	struct dt_template_Element template_element;
-	struct dt_template_EdgeBox margin;
 	struct dt_template_Property horizontal_alignment;
 	struct dt_template_Property vertical_alignment;
 };
@@ -219,18 +251,6 @@ DT_FUNC void
 dt_template_BoxChild_init(
 	struct dt_template_BoxChild* out_box_child,
 	struct dt_template_BoxChild const** out_child_ptr
-);
-
-DT_FUNC void
-dt_template_Box_set_width(
-	struct dt_template_Box* box,
-	float width
-);
-
-DT_FUNC void
-dt_template_Box_set_height(
-	struct dt_template_Box* box,
-	float height
 );
 
 DT_FUNC struct dt_layout_Box*
@@ -249,10 +269,6 @@ dt_template_Box_generate_layout(
 
 struct dt_template_Stack {
 	struct dt_template_StackChild const* first_child;
-	struct dt_template_Property min_width;
-	struct dt_template_Property max_width;
-	struct dt_template_Property min_height;
-	struct dt_template_Property max_height;
 	struct dt_template_Property stack_direction;
 	struct dt_template_Property last_child_fill;
 };
@@ -261,7 +277,6 @@ struct dt_template_StackChild {
 	struct dt_template_StackChild const* next_child;
 	dt_ViewModel_Expr predicate_expr;
 	struct dt_template_Element template_element;
-	struct dt_template_EdgeBox margin;
 	struct dt_template_Property cross_alignment;
 };
 

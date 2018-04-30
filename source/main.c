@@ -10,7 +10,17 @@
 static const int WINDOW_WIDTH = 800;
 static const int WINDOW_HEIGHT = 600;
 
-int main(
+void
+dt_OnClick(
+    struct dt_Context* const ctx,
+    va_list args
+) {
+    // Need to detect if this element has been clicked, call handler if that's the case
+    // Most elements shouldn't automatically output themselves
+}
+
+int
+main(
 	int argc,
 	char** argv
 ) {
@@ -44,8 +54,7 @@ int main(
     glfwMakeContextCurrent(window);
 
 	// Start the game loop
-	while (!glfwWindowShouldClose(window))
-	{
+	while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
         int width, height;
